@@ -15,4 +15,9 @@ public class CrawlerTask {
     private final String keyword;
     private final Set<String> foundUrls = ConcurrentHashMap.newKeySet();
     private volatile String status = "active";
+
+    public CrawlerTask(String id, String keyword) {
+        this.id = id;
+        this.keyword = keyword;
+    }
 }
