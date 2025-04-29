@@ -1,5 +1,5 @@
 package com.java.crawler.application.port.in;
 
-public interface StartCrawlerUseCase {
+public interface StartCrawlerServiceUseCase {
     String startSearch(String keyword);
 }

@@ -1,7 +1,7 @@
 package com.java.crawler.application.service;
 
-import com.java.crawler.application.port.in.GetCrawlerResultQuery;
-import com.java.crawler.application.port.in.StartCrawlerUseCase;
+import com.java.crawler.application.port.in.GetCrawlerServiceResultQuery;
+import com.java.crawler.application.port.in.StartCrawlerServiceUseCase;
 import com.java.crawler.application.port.out.LoadCrawlerTaskPort;
 import com.java.crawler.application.port.out.SaveCrawlerTaskPort;
 import com.java.crawler.domain.model.CrawlerTask;
@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class CrawlerService implements StartCrawlerUseCase, GetCrawlerResultQuery {
+public class CrawlerServiceImpl implements StartCrawlerServiceUseCase, GetCrawlerServiceResultQuery {
 
     private final SaveCrawlerTaskPort savePort;
     private final LoadCrawlerTaskPort loadPort;
