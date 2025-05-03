@@ -18,12 +18,12 @@ import java.util.Set;
 public class JsoupCrawlerEngine {
 
     @Async
-    public void crawlerAsync(CrawlerTask task, String baseUrl) {
+    public void crawlerAsync(CrawlerTask task, String baseUrl) throws IOException {
         Set<String> visited = new HashSet<>();
         crawler(task, baseUrl, baseUrl, visited);
     }
 
-    private void crawler(CrawlerTask task, String url, String baseUrl, Set<String> visited) {
+    private void crawler(CrawlerTask task, String url, String baseUrl, Set<String> visited) throws IOException {
         if(visited.contains(url) || !url.startsWith(baseUrl)) return;
         visited.add(url);
 
@@ -42,6 +42,7 @@ public class JsoupCrawlerEngine {
             }
         } catch(IOException ignored) {
             log.error("Error on crawler engine:", ignored);
+            throw new IOException(ignored.getMessage());
         }
     }
 }

@@ -9,10 +9,13 @@ import com.java.crawler.infrastructure.crawler.JsoupCrawlerEngine;
 import com.java.crawler.infrastructure.util.EnvUtils;
 import com.java.crawler.infrastructure.util.IdGenerator;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CrawlerServiceImpl implements StartCrawlerServiceUseCase, GetCrawlerServiceResultQuery {
@@ -29,9 +32,14 @@ public class CrawlerServiceImpl implements StartCrawlerServiceUseCase, GetCrawle
     @Override
     public String startSearch(String keyword) {
         String id = IdGenerator.generateId();
-        CrawlerTask crawlerTask = new CrawlerTask(id, keyword);
-        this.savePort.save(crawlerTask);
-        this.crawler.crawlerAsync(crawlerTask, EnvUtils.getBaseUrl());
+        try {
+            CrawlerTask crawlerTask = new CrawlerTask(id, keyword);
+            this.savePort.save(crawlerTask);
+            this.crawler.crawlerAsync(crawlerTask, EnvUtils.getBaseUrl());
+        } catch (IOException e) {
+            log.error("Error startSearch :", e);
+            throw new RuntimeException(e);
+        }
         return id;
     }
 }
