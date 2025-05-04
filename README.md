@@ -10,5 +10,6 @@ Technologies used:
 * Rest API
 * JSOUP
 
-
+Swagger Documentation
+http://localhost:[port]/swagger-ui/index.html#/
 
